@@ -1,6 +1,7 @@
 import axios from "axios";
 import { MessageAttachment } from "discord.js";
 import fs from "fs";
+import { delay } from "../utils/delay";
 
 export class DownloadAllAttachments {
   private counter = 0;
@@ -36,7 +37,24 @@ export class DownloadAllAttachments {
     for (const attachment of attachments) {
       this.counter++;
       console.log(`> Downloading ${attachment.name}`);
-      await this.downloadFile(attachment);
+      try {
+        await this.downloadFile(attachment);
+      } catch (err) {
+        // Please don't judge me ):
+        console.log(
+          `> Failed to download ${attachment.proxyURL}, trying again...`,
+          err
+        );
+
+        await delay(8000); // Just to prevent any errors with Discord servers.
+
+        await this.downloadFile(attachment).catch((err) => {
+          console.log(
+            `> Failed to download ${attachment.proxyURL}, skipping...`,
+            err
+          );
+        });
+      }
       console.log(`> Finished ${attachment.name}`);
     }
   }
