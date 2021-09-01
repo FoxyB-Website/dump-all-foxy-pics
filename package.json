@@ -1,0 +1,20 @@
+{
+  "name": "dump-all-foxy-pics",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/FoxyB-Website/dump-all-foxy-pics.git",
+  "author": "lupa <lupim@riddlehost.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules/ src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.10",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^13.1.0"
+  }
+}
