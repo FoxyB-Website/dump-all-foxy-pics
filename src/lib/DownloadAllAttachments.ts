@@ -1,7 +1,6 @@
 import axios from "axios";
 import { MessageAttachment } from "discord.js";
 import fs from "fs";
-import { delay } from "../utils/delay";
 
 export class DownloadAllAttachments {
   private counter = 0;
@@ -15,7 +14,7 @@ export class DownloadAllAttachments {
         `./images/foxy-${this.counter}.${fileExtension}`
       );
 
-      const response = await axios.get(attachment.proxyURL, {
+      const response = await axios.get(attachment.url, {
         responseType: "stream",
       });
 
