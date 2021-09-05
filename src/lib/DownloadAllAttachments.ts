@@ -39,23 +39,13 @@ export class DownloadAllAttachments {
       console.log(`> Downloading ${attachment.name}`);
       try {
         await this.downloadFile(attachment);
+        console.log(`> Finished ${attachment.name}`);
       } catch (err) {
-        // Please don't judge me ):
         console.log(
           `> Failed to download ${attachment.proxyURL}, trying again...`,
           err
         );
-
-        await delay(8000); // Just to prevent any errors with Discord servers.
-
-        await this.downloadFile(attachment).catch((err) => {
-          console.log(
-            `> Failed to download ${attachment.proxyURL}, skipping...`,
-            err
-          );
-        });
       }
-      console.log(`> Finished ${attachment.name}`);
     }
   }
 }
